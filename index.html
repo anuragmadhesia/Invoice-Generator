@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice Generetor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+    
+<body>
+    <center><h1>INVOICE ME</h1></center>
+    
+    <!--Application form-->
+    <div style="border: 3px solid black; margin: 30px; padding: 50px;">
+    <form>    
+        <div class="form-row">
+            <div class="col" style="border: 1px solid black; margin-right: 330px;">
+                <label for="logo">Upload Company Logo</label>
+                <input type="file" class="form-control-file" id="logo">
+            </div>
+            <div class="col">
+                <h2><label for="invoice_number">Tax Invoice</label></h2>
+                <input type="text" class="form-control" id="invoice_number" placeholder="Tax Invoice">
+            </div>
+        </div>
+        <div class="">
+            <p>FROM,</p>
+            <div class="form-group row">
+                <label for="address1" class="col-sm-2 col-form-label">Address Line 1</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address1" placeholder="Address">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="address2" class="col-sm-2 col-form-label">Address Line 2</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address2" placeholder="Address">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="state1" class="col-sm-2 col-form-label">State</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="state1">
+                        <option value="Assam">Assam</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Bihar">Bihar</option>
+                    </select>
+                </div>
+            </div>
+
+            <p>TO,</p>
+            <div class="form-group row">
+                <label for="address3" class="col-sm-2 col-form-label">Address Line 1</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address3" placeholder="Address">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="addres4" class="col-sm-2 col-form-label">Address Line 2</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address4" placeholder="Address">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="state2" class="col-sm-2 col-form-label">State</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="state2">
+                        <option value="Assam">Assam</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Bihar">Bihar</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th><label for="invoice_date" >Invoice Date</label></th>
+                <th><label for="due_date">Due Date</label></th>
+            </tr>
+            <tr>
+                <td><input type="date" class="form-control-date" id="invoice_date"></td>
+                <td><input type="date" class="form-control-date" id="due_date"></td>
+            </tr>
+        </table>
+
+        <table id="datas" class="table table-bordered">
+            
+        </table>
+        
+        <!--Form to add items to table-->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Item</button>
+  
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                        <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" placeholder="Enter quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="rate">Rate</label>
+                            <input type="number" class="form-control" id="rate" placeholder="Enter Rate">
+                        </div>
+                        <button type="submit" class="btn btn-primary"  id="addBtn">Add Item</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <hr>
+        <div class="col-sm-12" style="display: flex;flex-direction: column;align-items: flex-start;">
+            <pre>Sub Total     :   <span id="subtotal">...</span></pre>
+            <pre>Tax (in %)    :   <input type="number" name="tax" id="tax" onchange="totalValue()"></pre>
+            <pre>Total         :   <span id="total">...</span></pre>
+        </div>
+        <hr>
+        <p>Total in Words (Rupees) : <span id="inwords">...</span></p>
+    </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
